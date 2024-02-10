@@ -44,15 +44,12 @@ req := request.New().
 
 result, _ := Do(context.Background(), http.MethodPost, "http://localhost/api/v1/messages")
 
-// Access the raw data from from reading the response body at result.RawData.
-// Acces the *http.Respnse at result.Response. Reading from result.Response.Body
-// results in an error as the body has already been read. No need to close the 
-// response body.
+// Access the raw data from result.RawData. Access the *http.Respnse at
+// result.Response. Reading from result.Response.Body results in an error as the
+// body has already been read. No need to close the response body.
 ```
 
 Overriding the underlying HTTP client via context:
-
-
 
 ```go
 // We can set the underlying *http.Client via context.Context passed to
@@ -60,8 +57,8 @@ Overriding the underlying HTTP client via context:
 //
 // 	ctx := request.AttachClientToContext(context.Background(), &http.Client{})
 //
-// This is great for testing as we can override the `Transport` field on the 
-// client and thus mock the external system without needing to create an 
+// This is great for testing as we can override the `Transport` field on the
+// client and thus mock the external system without needing to create an
 // interface.
 
 // RoundTripperFunc simplifies creating a http.RoundTripper, which is used to
@@ -86,3 +83,4 @@ ctx := request.AttachClientToContext(context.Background(), &mockedClient)
 
 _ := request.New().Do(ctx, http.MethodGry, "http://localhost/api/v1/messages/123")
 ```
+
